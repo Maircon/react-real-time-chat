@@ -11,14 +11,16 @@ export default function Room({ roomId }) {
   const { socket } = useSocket()
 
   useEffect(() => {
-    socket.on('message', (mss) => {
-      console.log('socket on message', { mss })
-      setMessages(n => [...n, mss])
-    })
+    const roomCode = `message_${params.roomId}`;
+    console.log({ roomCode });
+    socket.on(roomCode, (mss) => {
+      console.log("socket on message", { mss });
+      setMessages((n) => [...n, mss]);
+    });
 
     return () => {
-      socket.off('message')
-    }
+      socket.off(roomCode);
+    };
   }, [socket])
   
   return (
