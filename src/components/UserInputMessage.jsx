@@ -10,9 +10,7 @@ export default function UserInputMessage() {
   const { roomId } = useParams();
 
   function handleOnClick() {
-    const roomCode = `message_${roomId}`;
-    console.log({ roomCode });
-    socket.emit(roomCode, text);
+    socket.emit("message", { text, roomId });
     setText("");
   }
 
